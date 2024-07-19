@@ -27,10 +27,15 @@ namespace InstantBoarding
             //AssetDatabase.global.LoadSettings(nameof(InstantBoarding), m_Setting, new Setting(this));
 
 
-            var oldSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<TransportTrainAISystem>();
-            oldSystem.Enabled = false;
+            var oldTrainSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<TransportTrainAISystem>();
+            oldTrainSystem.Enabled = false;
 
-            updateSystem.UpdateAt<InstantBoardingTrainSystem>(SystemUpdatePhase.GameSimulation);
+            var oldCarSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<TransportCarAISystem>();
+            oldCarSystem.Enabled = false;
+
+            updateSystem.UpdateAt<PatchedTransportCarAISystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateAt<PatchedTransportTrainAISystem>(SystemUpdatePhase.GameSimulation);
+            log.Info("Completed Patching of Base Train/CarAI Systems.");
             //updateSystem.UpdateBefore<InstantBoardingSystem>(SystemUpdatePhase.GameSimulation);
         }
 
