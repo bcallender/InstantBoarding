@@ -10,8 +10,8 @@ namespace InstantBoarding
 {
     public static class PassengerBoardingChecks
     {
-
-        public static uint CalculateDwellDelay(uint simulationFrameIndex, Game.Vehicles.CargoTransport cargoTransport, Game.Vehicles.PublicTransport publicTransport)
+        public static uint CalculateDwellDelay(uint simulationFrameIndex, Game.Vehicles.CargoTransport cargoTransport,
+            Game.Vehicles.PublicTransport publicTransport)
         {
             var intendedDepartureFrame = simulationFrameIndex > publicTransport.m_DepartureFrame
                 ? publicTransport.m_DepartureFrame
@@ -20,14 +20,14 @@ namespace InstantBoarding
             var approxSecondsLate = numberOfFramesLate / 60U;
             return approxSecondsLate;
         }
-        
+
         public static bool ArePassengersReady(DynamicBuffer<Passenger> passengers,
             ComponentLookup<CurrentVehicle> currentVehicleData,
             EntityCommandBuffer.ParallelWriter commandBuffer,
             Colossal.Collections.NativeQuadTree<Entity, QuadTreeBoundsXZ> searchTree,
             uint approxSecondsLate,
-            uint maxAllowedSecondsLate, int jobIndex) {
-
+            uint maxAllowedSecondsLate, int jobIndex)
+        {
             return approxSecondsLate > maxAllowedSecondsLate
                 ? //how tolerant are you for your trains?
                 BruteForceBoarding(passengers, currentVehicleData, commandBuffer, searchTree, jobIndex)
@@ -39,7 +39,6 @@ namespace InstantBoarding
             EntityCommandBuffer.ParallelWriter commandBuffer, NativeQuadTree<Entity, QuadTreeBoundsXZ> searchTree,
             int jobIndex)
         {
-            
             for (int i = 0; i < passengers.Length; i++)
             {
                 Entity passenger = passengers[i].m_Passenger;
@@ -83,8 +82,5 @@ namespace InstantBoarding
 
             return true;
         }
-
     }
-
-
 }
