@@ -36,7 +36,7 @@ namespace InstantBoarding
 
             updateSystem.UpdateAt<PatchedTransportCarAISystem>(SystemUpdatePhase.GameSimulation);
             updateSystem.UpdateAt<PatchedTransportTrainAISystem>(SystemUpdatePhase.GameSimulation);
-            log.Info("Completed Patching of Base Train/CarAI Systems.");
+            log.Info("Completed Replacement of Base Train/CarAI Systems.");
             //updateSystem.UpdateBefore<InstantBoardingSystem>(SystemUpdatePhase.GameSimulation);
         }
 
