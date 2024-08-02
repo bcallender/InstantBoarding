@@ -1578,8 +1578,7 @@ namespace AllAboard.System.Patched
             [ReadOnly] public ComponentLookup<Owner> __Game_Common_Owner_RO_ComponentLookup;
             [ReadOnly] public ComponentLookup<PathInformation> __Game_Pathfind_PathInformation_RO_ComponentLookup;
 
-            [ReadOnly]
-            public ComponentLookup<TransportVehicleRequest>
+            [ReadOnly] public ComponentLookup<TransportVehicleRequest>
                 __Game_Simulation_TransportVehicleRequest_RO_ComponentLookup;
 
             [ReadOnly] public ComponentLookup<Curve> __Game_Net_Curve_RO_ComponentLookup;
@@ -1589,12 +1588,10 @@ namespace AllAboard.System.Patched
             [ReadOnly] public ComponentLookup<TrainData> __Game_Prefabs_TrainData_RO_ComponentLookup;
             [ReadOnly] public ComponentLookup<PrefabRef> __Game_Prefabs_PrefabRef_RO_ComponentLookup;
 
-            [ReadOnly]
-            public ComponentLookup<PublicTransportVehicleData>
+            [ReadOnly] public ComponentLookup<PublicTransportVehicleData>
                 __Game_Prefabs_PublicTransportVehicleData_RO_ComponentLookup;
 
-            [ReadOnly]
-            public ComponentLookup<CargoTransportVehicleData>
+            [ReadOnly] public ComponentLookup<CargoTransportVehicleData>
                 __Game_Prefabs_CargoTransportVehicleData_RO_ComponentLookup;
 
             [ReadOnly] public ComponentLookup<Waypoint> __Game_Routes_Waypoint_RO_ComponentLookup;

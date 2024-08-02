@@ -29,8 +29,7 @@ namespace AllAboard.System.Utility
             uint approxSecondsLate, int jobIndex)
         {
             return approxSecondsLate > MaxAllowedSecondsLate
-                ? //how tolerant are you for your trains?
-                BruteForceBoarding(passengers, currentVehicleData, commandBuffer, searchTree, jobIndex)
+                ? BruteForceBoarding(passengers, currentVehicleData, commandBuffer, searchTree, jobIndex)
                 : AreAllPassengersBoarded(passengers, currentVehicleData);
         }
 
