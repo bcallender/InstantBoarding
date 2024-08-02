@@ -7,7 +7,7 @@ using Game.Tools;
 using Unity.Collections;
 using Unity.Entities;
 
-namespace InstantBoarding
+namespace AllAboard
 {
     /// <summary>
     /// DOES NOT WORK!
