@@ -8,10 +8,11 @@ namespace AllAboard.System.Utility
 {
     public static class PassengerBoardingChecks
     {
-        private static readonly uint MaxAllowedSecondsLate = Mod.m_Setting.TrainMaxDwellDelaySlider;
-        private static readonly uint SimulationFramesPerSecond = Mod.m_Setting.SimulationFramesPerSecond;
-        public static uint CalculateDwellDelay(uint simulationFrameIndex, Game.Vehicles.CargoTransport cargoTransport,
-            Game.Vehicles.PublicTransport publicTransport)
+        private static readonly uint MaxAllowedSecondsLate = 30U;
+        private static readonly uint SimulationFramesPerSecond = 30U;
+
+        public static uint CalculateDwellDelay(uint simulationFrameIndex, CargoTransport cargoTransport,
+            PublicTransport publicTransport)
         {
             var intendedDepartureFrame = simulationFrameIndex > publicTransport.m_DepartureFrame
                 ? publicTransport.m_DepartureFrame
@@ -24,10 +25,9 @@ namespace AllAboard.System.Utility
         public static bool ArePassengersReady(DynamicBuffer<Passenger> passengers,
             ComponentLookup<CurrentVehicle> currentVehicleData,
             EntityCommandBuffer.ParallelWriter commandBuffer,
-            Colossal.Collections.NativeQuadTree<Entity, QuadTreeBoundsXZ> searchTree,
+            NativeQuadTree<Entity, QuadTreeBoundsXZ> searchTree,
             uint approxSecondsLate, int jobIndex)
         {
-            
             return approxSecondsLate > MaxAllowedSecondsLate
                 ? //how tolerant are you for your trains?
                 BruteForceBoarding(passengers, currentVehicleData, commandBuffer, searchTree, jobIndex)
@@ -39,13 +39,10 @@ namespace AllAboard.System.Utility
             EntityCommandBuffer.ParallelWriter commandBuffer, NativeQuadTree<Entity, QuadTreeBoundsXZ> searchTree,
             int jobIndex)
         {
-            for (int i = 0; i < passengers.Length; i++)
+            for (var i = 0; i < passengers.Length; i++)
             {
-                Entity passenger = passengers[i].m_Passenger;
-                if (currentVehicleDataLookup.HasComponent(passenger))
-                {
-                    continue;
-                }
+                var passenger = passengers[i].m_Passenger;
+                if (currentVehicleDataLookup.HasComponent(passenger)) continue;
 
 
                 if ((currentVehicleDataLookup[passenger].m_Flags & CreatureVehicleFlags.Entering) != 0)
@@ -71,12 +68,12 @@ namespace AllAboard.System.Utility
         private static bool AreAllPassengersBoarded(DynamicBuffer<Passenger> passengers,
             ComponentLookup<CurrentVehicle> currentVehicleData)
         {
-            for (int index = 0; index < passengers.Length; ++index)
+            for (var index = 0; index < passengers.Length; ++index)
             {
-                Entity passenger2 = passengers[index].m_Passenger;
+                var passenger2 = passengers[index].m_Passenger;
                 if (currentVehicleData.HasComponent(passenger2) &&
                     (currentVehicleData[passenger2].m_Flags & CreatureVehicleFlags.Ready) ==
-                    (CreatureVehicleFlags)0)
+                    0)
                     return false;
             }
 

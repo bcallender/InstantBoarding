@@ -1,5 +1,4 @@
-﻿using Colossal.Collections;
-using Game;
+﻿using Game;
 using Game.Citizens;
 using Game.Common;
 using Game.Creatures;
@@ -10,7 +9,7 @@ using Unity.Entities;
 namespace AllAboard
 {
     /// <summary>
-    /// DOES NOT WORK!
+    ///     DOES NOT WORK!
     /// </summary>
     public partial class InstantBoardingSystem : GameSystemBase
     {
@@ -20,9 +19,9 @@ namespace AllAboard
         {
             base.OnCreate();
 
-            _query = GetEntityQuery(new EntityQueryDesc()
+            _query = GetEntityQuery(new EntityQueryDesc
             {
-                All = new[] 
+                All = new[]
                 {
                     ComponentType.ReadWrite<CurrentVehicle>()
                 },
@@ -43,10 +42,10 @@ namespace AllAboard
         {
             var passengers = _query.ToEntityArray(Allocator.Temp);
 
-            foreach(var passenger in passengers)
+            foreach (var passenger in passengers)
             {
                 var passengerData = EntityManager.GetComponentData<CurrentVehicle>(passenger);
-                
+
                 if ((passengerData.m_Flags & CreatureVehicleFlags.Entering) != 0)
                 {
                     passengerData.m_Flags |= CreatureVehicleFlags.Ready;

@@ -12,8 +12,9 @@ namespace AllAboard
     public class Mod : IMod
     {
         public static ILog log = LogManager.GetLogger($"{nameof(AllAboard)}.{nameof(Mod)}").SetShowsErrorsInUI(false);
-        
+
         public static Setting m_Setting;
+
         public void OnLoad(UpdateSystem updateSystem)
         {
             log.Info(nameof(OnLoad));
@@ -29,7 +30,8 @@ namespace AllAboard
             AssetDatabase.global.LoadSettings(nameof(AllAboard), m_Setting, new Setting(this));
 
 
-            var oldTrainSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<TransportTrainAISystem>();
+            var oldTrainSystem =
+                World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<TransportTrainAISystem>();
             oldTrainSystem.Enabled = false;
 
             var oldCarSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<TransportCarAISystem>();
